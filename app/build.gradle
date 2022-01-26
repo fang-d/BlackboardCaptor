@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    project.archivesBaseName = 'BlackboardCaptor'
+
+    compileSdk 31
+    defaultConfig {
+        applicationId "net.fangd.bbc"
+        minSdk 26
+        targetSdk 31
+        versionCode 1
+        versionName "1.0.1"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags  '-std=c++17 -Wall -Wextra'
+                arguments '-DANDROID_STL=c++_shared'
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/cpp/3rdparty/OpenCV-android-sdk/sdk/native/libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            externalNativeBuild {
+                cmake {
+                    cppFlags  '-std=c++17 -DNDEBUG'
+                    arguments '-DANDROID_STL=c++_shared'
+                }
+            }
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
+        }
+        debug {
+            ndk { abiFilters 'arm64-v8a' }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.10.2'
+        }
+    }
+
+    buildFeatures {
+        viewBinding false
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+}

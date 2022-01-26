@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">拍黑板</string>
+    <string name="take_photo">拍照</string>
+    <string name="select_photo">相册</string>
+    <string name="no_blackboard">未发现黑板</string>
+    <string name="failed2take">拍照失败</string>
+    <string name="failed2select">选择失败</string>
+    <string name="permission_denial">获取权限失败</string>
+
+    <string name="menu_cropped_image">仅裁切</string>
+    <string name="menu_sharpened_image">锐化图像</string>
+    <string name="menu_binarized_image">二值图像</string>
+</resources>

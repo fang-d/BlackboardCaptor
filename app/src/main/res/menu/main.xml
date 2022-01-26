@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sharpen_image"
+        android:title="@string/menu_sharpened_image" />
+    <item
+        android:id="@+id/binarize_image"
+        android:title="@string/menu_binarized_image" />
+    <item
+        android:id="@+id/crop_image"
+        android:title="@string/menu_cropped_image" />
+</menu>

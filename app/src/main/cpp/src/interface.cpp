@@ -1,10 +1,10 @@
-#include <jni.h>
-//#include <android/bitmap.h>
-#include "detection.hpp"
-#include "transformation.hpp"
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
+
+#include "interface.hpp"
+#include "detection.hpp"
+#include "transformation.hpp"
 
 enum {
     CUT_IMAGE = 1,

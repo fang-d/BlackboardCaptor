@@ -1,7 +1,7 @@
 #include "detection.hpp"
 #include <algorithm>
-#include <opencv2/imgproc.hpp>
 #include <cfloat>
+#include <opencv2/imgproc.hpp>
 
 cv::Mat preProcess(const cv::Mat &src, float &hRatio, float &vRatio)
 {
@@ -19,7 +19,7 @@ cv::Mat preProcess(const cv::Mat &src, float &hRatio, float &vRatio)
     return dst;
 }
 
-void erase(cv::Mat &image)
+void erase(cv::InputOutputArray image)
 {
     // Do morphological operations to remove the handwriting on the blackboard
     for (int size : {5, 7, 7}) {
@@ -29,7 +29,7 @@ void erase(cv::Mat &image)
     }
 }
 
-void detectLines(const cv::Mat &src, std::vector<Line> &hLines, std::vector<Line> &vLines)
+void detectLines(cv::InputArray src, std::vector<Line> &hLines, std::vector<Line> &vLines)
 {
     // Edge detection
     cv::Mat edges;
@@ -71,12 +71,11 @@ std::vector<cv::Point2f> solveIntersections(const std::vector<Line> &hLines, con
     return points;
 }
 
-void calibratePoints(const cv::Mat &image, std::vector<cv::Point2f> &points)
+void calibratePoints(cv::InputArray src, std::vector<cv::Point2f> &points)
 {
     cv::Mat edges;
     constexpr auto cmpPoints = [](const cv::Point2f &a, const cv::Point2f &b) -> bool {
-        //return (a.x == b.x) ? (a.y < b.y) : (a.x < b.x);
-        return (a.x < b.x) || (b.x >= a.x && a.y < b.y);
+        return (a.x < b.x) || ((a.x <= b.x) && a.y < b.y);
     };
     constexpr auto eqlPoints = [](const cv::Point2f &a, const cv::Point2f &b) -> bool {
         return std::fabs(a.x - b.x) < 0.5f && std::fabs(a.y - b.y) < 0.5f;
@@ -84,7 +83,7 @@ void calibratePoints(const cv::Mat &image, std::vector<cv::Point2f> &points)
     cv::TermCriteria criteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 100, 0.001);
     for (int s : {7, 5})
     {
-        cornerSubPix(image, points, cv::Size(s, s), cv::Size(-1, -1), criteria);
+        cornerSubPix(src, points, cv::Size(s, s), cv::Size(-1, -1), criteria);
         sort(points.begin(), points.end(), cmpPoints);
         points.erase(std::unique(points.begin(), points.end(), eqlPoints), points.end());
     }
@@ -97,9 +96,7 @@ bool sortPoints(const std::vector<cv::Point2f> &points, cv::Point2f result[4], i
     float distances[4] = {FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX};
     for (const cv::Point2f& point : points)
     {
-        const float dx = (point.x - static_cast<float>(cols));
-        const float dy = (point.y - static_cast<float>(cols));
-        const float distance = sqrtf(dx * dx + dy * dy);
+        const float distance = hypotf(point.x - static_cast<float>(cols), point.y - static_cast<float>(cols));
         const auto id = static_cast<size_t>((static_cast<float>(cols) < point.x) | ((static_cast<float>(rows) < point.y) << 1));
         if (distance < distances[id])
         {
@@ -107,5 +104,6 @@ bool sortPoints(const std::vector<cv::Point2f> &points, cv::Point2f result[4], i
             distances[id] = distance;
         }
     }
-    return std::none_of(distances, distances + sizeof(distances), [](const float x) -> bool { return x == FLT_MAX; });
+    return std::none_of(distances, distances + (sizeof(distances) / sizeof(int)),
+                        [](const float x) -> bool { return x == FLT_MAX; });
 }

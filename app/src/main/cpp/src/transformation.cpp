@@ -1,10 +1,10 @@
-#include "transformation.hpp"
 #include <algorithm>
 #include <cmath>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include "transformation.hpp"
 
-void transform(cv::Mat &image, const cv::Point2f points[4], const float ratio)
+void transform(cv::InputOutputArray image, const cv::Point2f points[4], const float ratio)
 {
     constexpr auto dis = [](const cv::Point2f &a, const cv::Point2f &b) -> float {
         const float dx = (a.x - b.x), dy = (a.y - b.y);
@@ -18,7 +18,7 @@ void transform(cv::Mat &image, const cv::Point2f points[4], const float ratio)
                         cv::Size(static_cast<int>(imgWidth), static_cast<int>(imgHeight)));
 }
 
-void sharpen(cv::Mat &image)
+void sharpen(cv::InputOutputArray image)
 {
     constexpr float STRENGTH = 5.1f; // Between 4 and 6
     cv::Mat kernel = (cv::Mat_<float>(3, 3) << 0, -1, 0, -1, STRENGTH, 0, -1, 0, -1);
@@ -26,7 +26,7 @@ void sharpen(cv::Mat &image)
     cv::Mat copy;
 }
 
-void binarize(cv::Mat &image)
+void binarize(cv::InputOutputArray image)
 {
     cv::Mat copy;
     cv::cvtColor(image, copy, cv::COLOR_BGR2GRAY);

@@ -17,7 +17,7 @@ add_library(${PROJECT_NAME}
 )
 
 target_compile_options(${PROJECT_NAME}
-    PRIVATE -Wall -Wextra -Wno-c++98-compat -Wno-c++98-compat-pedantic
+    PRIVATE -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-system-headers
 )
 
 target_include_directories(${PROJECT_NAME}

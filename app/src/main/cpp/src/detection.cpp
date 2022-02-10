@@ -105,5 +105,5 @@ bool sortPoints(const std::vector<cv::Point2f> &points, cv::Point2f result[4], i
         }
     }
     return std::none_of(distances, distances + (sizeof(distances) / sizeof(int)),
-                        [](const float x) -> bool { return x == FLT_MAX; });
+                        [](const float x) -> bool { return fabs(x - FLT_MAX) < 1e-5f; });
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.1)
 
 set(OPENCV_VERSION   4.5.5)
 set(OPENCV_SDK_HASH  404e5a04b2f01833a208857eb192c88f33fdfc66f827ac2a993e4581849b2d08)

@@ -1,15 +1,13 @@
-# 拍黑板
-![Logo](logo.svg)
----
+<h1 align="center">Blackboard Captor</h1>
+<p align="center"><img width="200" src="./logo.svg"></p>
 
-[English](ReadMe.md)
-
-## 这个项目是什么
 这是一个安卓应用程序，用户可以使用它从相册中选择图片，或通过用户的相机拍摄黑板照片。
 它将识别照片中的黑板（矩形），裁剪出多余的图像，对其进行校正、优化，并将其保存在用户的手机中。
 同时，程序还提供了仅裁切、锐化、二值化等多种样式，帮助用户获得想要的图片效果。
 
 ## 使用说明
+https://github.com/fang-d/BlackboardCaptor/assets/39642933/5932b0f8-628e-4e35-a628-8bd87e65ebec
+
 ### 拍摄照片
 1. 启动程序
 2. 单击“拍照”按钮

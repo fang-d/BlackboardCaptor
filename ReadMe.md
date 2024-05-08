@@ -1,15 +1,13 @@
-# Blackboard Captor
-![Logo](logo.svg)
----
+<h1 align="center">Blackboard Captor</h1>
+<p align="center"><img width="200" src="./logo.svg"></p>
 
-[简体中文](ReadMe.zh-CN.md)
-
-## What is this application
 This is an android appliaction with which you can select pictures from your album, or take a picture of the blackboard through the users’s camera.
 It will recognize the blackboard (rectangles) in the photo, crop out the extra image, correct it, optimize it, and save it in the user’s mobile phone.
 At the same time, we also provide replacement of the background color, which helps users to obtain better results.
 
 ## How to use it
+https://github.com/fang-d/BlackboardCaptor/assets/39642933/5932b0f8-628e-4e35-a628-8bd87e65ebec
+
 ### Take Photo
 1. Launch the Application
 2. Click "TAKE PHOTO" bottom

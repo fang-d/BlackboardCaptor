@@ -28,5 +28,12 @@ https://github.com/fang-d/BlackboardCaptor/assets/39642933/5932b0f8-628e-4e35-a6
 3. 选择你喜欢的样式
 4. 拍照或选择照片
 
+## 图像处理流程
+
+<p align="center">
+  <img width="49%" src="https://github.com/fang-d/BlackboardCaptor/assets/39642933/2407a0b1-1e9c-45af-a64a-1fdf09187435">
+  <img width="49%" src="https://github.com/fang-d/BlackboardCaptor/assets/39642933/7b0acad9-533a-440a-a4c1-b62da1aed0d8">
+</p>
+
 ## 项目中用到的第三方库
 [OpenCV](https://github.com/opencv/opencv): 开源的视觉库
